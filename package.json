@@ -1,13 +1,13 @@
 {
   "name": "spotverlay",
   "productName": "Spotverlay",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Always-on-top music overlay for Windows that reads Spotify playback via SMTC — no API key, no DLL injection.",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "electron-builder --publish never"
   },
   "build": {
     "appId": "com.spotverlay.app",
