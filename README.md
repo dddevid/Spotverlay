@@ -36,3 +36,6 @@ If you want to compile the `.exe` yourself:
 - Built with Electron and Node.js.
 - The UI uses native CSS backdrop filters for the glass effect (works great on Windows 11).
 - We use a transparent, un-hidable `BrowserWindow` with `opacity: 0` instead of actually hiding the window at the OS level. This completely bypasses a nasty Electron bug on Windows where transparent windows get a black background when repeatedly shown and hidden.
+
+### Future Plans
+I will most likely rewrite this app in **Tauri** in the near future to achieve maximum performance and lower memory usage. When that happens, I also plan to add support for **macOS** and possibly **Linux**.
