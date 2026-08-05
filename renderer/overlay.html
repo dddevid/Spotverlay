@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Spotverlay – Now Playing</title>
+<link rel="stylesheet" href="overlay.css" />
+</head>
+<body>
+  <div class="card" id="card">
+    <div class="art-wrap" id="artWrap">
+      <img id="art" class="art" alt="" />
+      <div id="artFallback" class="art-fallback">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none">
+          <path d="M9 18V5l12-2v13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="1.6"/>
+          <circle cx="18" cy="16" r="3" stroke="currentColor" stroke-width="1.6"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="info">
+      <div class="title" id="title">Nothing playing</div>
+      <div class="artist" id="artist">&nbsp;</div>
+    </div>
+
+    <div class="eq" id="eq" aria-hidden="true">
+      <span></span><span></span><span></span><span></span>
+    </div>
+  </div>
+  <script src="overlay.js"></script>
+</body>
+</html>

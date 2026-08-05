@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Spotverlay – Settings</title>
+<link rel="stylesheet" href="settings.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="header-logo">
+        <div class="logo-bars">
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <span class="header-title">Spotverlay</span>
+      </div>
+      <span class="header-sub">Settings</span>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Window Behavior</div>
+      <label class="toggle-row" id="toggleAlwaysOnTop">
+        <div class="toggle-info">
+          <span class="toggle-title">Always on Top</span>
+          <span class="toggle-desc">Keep the overlay permanently visible on screen</span>
+        </div>
+        <div class="toggle-switch" id="switchAlwaysOnTop">
+          <div class="toggle-thumb"></div>
+        </div>
+      </label>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Overlay Position</div>
+      <div class="position-grid" id="positionGrid">
+        <button class="pos-btn" id="pos-top-left" data-pos="top-left">
+          <span class="pos-dot"></span>
+          <span class="pos-label">Top Left</span>
+        </button>
+        <button class="pos-btn" id="pos-top-right" data-pos="top-right">
+          <span class="pos-dot"></span>
+          <span class="pos-label">Top Right</span>
+        </button>
+        <button class="pos-btn" id="pos-bottom-left" data-pos="bottom-left">
+          <span class="pos-dot"></span>
+          <span class="pos-label">Bottom Left</span>
+        </button>
+        <button class="pos-btn" id="pos-bottom-right" data-pos="bottom-right">
+          <span class="pos-dot"></span>
+          <span class="pos-label">Bottom Right</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Animation Style</div>
+      <div class="segment-control" id="animControl">
+        <button class="seg-btn" id="anim-fade" data-anim="fade">Fade in & out</button>
+        <button class="seg-btn" id="anim-slide" data-anim="slide">Slide from edge</button>
+      </div>
+    </div>
+
+    <button class="btn-save" id="btnSave">Save Changes</button>
+    <div class="save-feedback" id="saveFeedback">✓ Settings saved</div>
+  </div>
+
+  <script src="settings.js"></script>
+</body>
+</html>
