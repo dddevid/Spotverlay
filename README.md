@@ -12,7 +12,12 @@ Spotverlay doesn't use the official Spotify Web API, so you don't need to mess w
 *   **macOS**: Runs an AppleScript (`osascript`) to query the `Spotify.app` process directly.
 *   **Linux**: Listens to D-Bus via the MPRIS2 interface (using `zbus`).
 
-Because the local OS APIs often return low-quality or cached album art (especially the Windows 11 SMTC bug), the app takes the artist and track name and pings the public iTunes Search API to grab a clean 600x600 cover.
+Because the local OS APIs often return low-quality or cached album art, the app takes the artist and track name and pings the public iTunes Search API to grab a clean 600x600 cover.
+
+<details>
+<summary><b>Why not use the Windows 11 SMTC cover art?</b></summary>
+The Windows 11 System Media Transport Controls (SMTC) API has a known issue with Spotify where the album thumbnail is often heavily cached (showing a song from hours ago), severely compressed/blurry, or sometimes completely null. Because the text metadata (artist and title) updates instantly and reliably, Spotverlay ignores the native thumbnail and fetches a high-quality cover from iTunes instead.
+</details>
 
 When a track changes, the overlay slides/fades in, stays for a few seconds, and hides itself again. It's fully click-through, so it won't steal your mouse focus.
 
