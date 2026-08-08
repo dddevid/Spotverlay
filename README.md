@@ -4,6 +4,9 @@ A simple, always-on-top overlay that shows what's playing on Spotify when the tr
 
 Originally written in Electron, I rewrote this in Tauri + Rust. It now idles at around ~10MB of RAM instead of ~80MB, and the binary is much smaller. It supports Windows, macOS, and Linux.
 
+> [!NOTE]
+> **Linux Users:** The Linux version (D-Bus MPRIS2) has been implemented but has not been heavily tested yet. If you run into any issues (e.g. track not updating or overlay not showing), please [open an issue](https://github.com/dddevid/Spotverlay/issues) — it helps a lot!
+
 ## how it works under the hood
 
 Spotverlay doesn't use the official Spotify Web API, so you don't need to mess with OAuth tokens or developer apps. It just asks the OS what media is currently playing:
