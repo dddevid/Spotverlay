@@ -54,7 +54,20 @@ jobs:
         with:
           tagName: ${{ github.ref_name }} # e.g. v1.0.0
           releaseName: 'Spotverlay ${{ github.ref_name }}'
-          releaseBody: 'See the assets below to download and install Spotverlay.'
+          releaseBody: |
+            Download the correct file for your operating system:
+            
+            ### 🪟 Windows
+            - **`Spotverlay_*_x64-setup.exe`** — Recommended installer
+            - **`Spotverlay_*_x64_en-US.msi`** — Alternative MSI installer
+            
+            ### 🍎 macOS
+            - **`Spotverlay_*_aarch64.dmg`** — For modern Apple Silicon (M1/M2/M3) Macs
+            - **`Spotverlay_*_x64.dmg`** — For older Intel Macs
+            
+            ### 🐧 Linux
+            - **`spotverlay_*_amd64.deb`** — Debian/Ubuntu installer
+            - **`Spotverlay_*_amd64.AppImage`** — Universal AppImage for most distros
           releaseDraft: false
           prerelease: false
           args: ${{ matrix.args }}
