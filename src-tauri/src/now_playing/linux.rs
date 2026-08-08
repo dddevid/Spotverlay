@@ -64,7 +64,7 @@ fn get_string(
 ) -> Option<String> {
     let val = map.get(key)?;
     // Try to extract as string
-    if let Ok(s) = val.downcast_ref::<str>() {
+    if let Ok(s) = val.downcast_ref::<&str>() {
         let trimmed = s.trim();
         if !trimmed.is_empty() {
             return Some(trimmed.to_string());
@@ -81,7 +81,7 @@ fn get_artist(
     if let Ok(arr) = val.downcast_ref::<zbus::zvariant::Array>() {
         let parts: Vec<String> = arr
             .iter()
-            .filter_map(|v| v.downcast_ref::<str>().ok().map(|s| s.to_string()))
+            .filter_map(|v| v.downcast_ref::<&str>().ok().map(|s| s.to_string()))
             .collect();
         if !parts.is_empty() {
             return Some(parts.join(", "));
