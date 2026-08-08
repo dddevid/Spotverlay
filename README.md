@@ -1,63 +1,39 @@
-# Spotverlay
+# spotverlay
 
-Spotverlay is a lightweight, always-on-top music overlay for **Windows, macOS and Linux**.  
-It shows what's playing on Spotify without needing to alt-tab or open the app.
+A simple, always-on-top overlay that shows what's playing on Spotify when the track changes. Built so you don't have to alt-tab out of a game or whatever you're doing just to see the song name.
 
-Built with **Tauri + Rust** for maximum performance and minimal memory usage (~10 MB RAM vs ~80 MB for Electron).
+Originally written in Electron, I rewrote this in Tauri + Rust. It now idles at around ~10MB of RAM instead of ~80MB, and the binary is much smaller. It supports Windows, macOS, and Linux.
 
----
+## how it works under the hood
 
-## How it works
+Spotverlay doesn't use the official Spotify Web API, so you don't need to mess with OAuth tokens or developer apps. It just asks the OS what media is currently playing:
 
-No API keys, no DLL injection, no OAuth. Spotverlay reads the currently playing track directly from the OS:
+*   **Windows**: Uses `windows-rs` to read from SMTC (System Media Transport Controls).
+*   **macOS**: Runs an AppleScript (`osascript`) to query the `Spotify.app` process directly.
+*   **Linux**: Listens to D-Bus via the MPRIS2 interface (using `zbus`).
 
-| Platform | Method |
-|---|---|
-| 🪟 Windows | **SMTC** (System Media Transport Controls) via `windows-rs` WinRT API |
-| 🍎 macOS | **AppleScript** — queries `Spotify.app` directly via `osascript` |
-| 🐧 Linux | **D-Bus MPRIS2** — standard media player interface (`zbus` crate) |
+Because the local OS APIs often return low-quality or cached album art (especially the Windows 11 SMTC bug), the app takes the artist and track name and pings the public iTunes Search API to grab a clean 600x600 cover.
 
-When a song changes:
-1. The Rust backend detects the new track via the OS-native API.
-2. It hits the **iTunes Search API** to fetch a high-res (600×600) album cover.
-3. The overlay card animates in with the artwork, title, and artist.
-4. After 4 seconds it smoothly fades out (unless "Always on Top" is enabled).
+When a track changes, the overlay slides/fades in, stays for a few seconds, and hides itself again. It's fully click-through, so it won't steal your mouse focus.
 
----
+## building it yourself
 
-## Features
-
-- **Zero setup** — No API keys, no logins, no OAuth. Just launch and it works.
-- **Cross-platform** — Windows, macOS, and Linux supported out of the box.
-- **Customizable animations** — Fade or slide from the screen edge.
-- **Smart auto-hide** — Pops up for 4 seconds on track change, then disappears.
-- **Click-through overlay** — Won't steal focus while gaming or working.
-- **System tray** — Right-click the tray icon to access Settings or quit.
-- **Tiny footprint** — ~10 MB RAM, ~3 MB binary (Tauri + Rust).
-
----
-
-## Building from source
-
-### Requirements
-- [Rust](https://rustup.rs/) (stable)
-- [Node.js](https://nodejs.org/) 18+
-- Tauri prerequisites for your platform: https://tauri.app/start/prerequisites/
-
-### Steps
+Make sure you have [Node.js](https://nodejs.org/), [Rust](https://rustup.rs/), and the [Tauri OS prerequisites](https://tauri.app/start/prerequisites/) installed.
 
 ```bash
-git clone https://github.com/youruser/spotverlay
+git clone https://github.com/dddevid/Spotverlay
 cd spotverlay
 npm install
-npm run dev      # development mode
-npm run tauri build    # production build → src-tauri/target/release/
+
+# run locally
+npm run dev
+
+# build release binary
+npm run tauri build
 ```
 
----
+The compiled executable will be in `src-tauri/target/release/`.
 
-## Technical notes
+## settings
 
-- The overlay is a **transparent, click-through, always-on-top** Tauri `WebviewWindow` with `decorations: false`.
-- Artwork is fetched from the **public iTunes Search API** — same technique as the original Electron version, avoiding the Windows 11 SMTC thumbnail bug.
-- Settings are persisted as JSON in the OS app data directory.
+There's a tray icon. Right-click it (or left-click) to open settings where you can change the position (corners), animation style (fade/slide), and toggle if you want it permanently visible instead of auto-hiding. Settings are saved locally as a simple JSON file.
