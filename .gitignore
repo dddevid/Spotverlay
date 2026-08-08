@@ -1,6 +1,11 @@
+# Dependencies
 node_modules/
+
+# Tauri build output
+src-tauri/target/
+
+# Old Electron build output  
 dist/
-.idea/
-.vscode/
-*.log
+
+# Settings file
 spotverlay-settings.json

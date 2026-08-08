@@ -1,4 +1,4 @@
-name: Build and Release Windows App
+name: Build and Release Tauri App
 
 on:
   push:
@@ -6,12 +6,23 @@ on:
       - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
 jobs:
-  build:
-    runs-on: windows-latest
-
+  release:
     permissions:
       contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: 'macos-latest'
+            args: '--target aarch64-apple-darwin'
+          - platform: 'macos-latest'
+            args: '--target x86_64-apple-darwin'
+          - platform: 'ubuntu-22.04'
+            args: ''
+          - platform: 'windows-latest'
+            args: ''
 
+    runs-on: ${{ matrix.platform }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -21,18 +32,29 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install dependencies
+      - name: Install dependencies (Ubuntu only)
+        if: matrix.platform == 'ubuntu-22.04'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf
+
+      - name: Install frontend dependencies
         run: npm install
 
-      - name: Build Windows Executable
-        run: npm run dist
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Create Release
-        uses: softprops/action-gh-release@v1
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
         with:
-          files: dist/*.exe
-          generate_release_notes: true
+          # Automatically add macOS targets if on macOS
+          targets: ${{ matrix.platform == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
+
+      - name: Build and Create Release
+        uses: tauri-apps/tauri-action@v0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: ${{ github.ref_name }} # e.g. v1.0.0
+          releaseName: 'Spotverlay ${{ github.ref_name }}'
+          releaseBody: 'See the assets below to download and install Spotverlay.'
+          releaseDraft: false
+          prerelease: false
+          args: ${{ matrix.args }}

@@ -21,7 +21,7 @@ html, body {
   height: 100%;
   background: var(--bg);
   color: var(--text);
-  font-family: 'Inter', 'Segoe UI Variable', 'Segoe UI', sans-serif;
+  font-family: 'Inter', 'Segoe UI Variable', 'Segoe UI', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
   overflow-y: auto;
@@ -127,6 +127,7 @@ html, body {
   cursor: pointer;
   transition: border-color 0.2s, background 0.2s;
   user-select: none;
+  -webkit-user-select: none;
 }
 
 .toggle-row:hover {
@@ -238,9 +239,9 @@ html, body {
   letter-spacing: 0.01em;
 }
 
-#pos-top-left { border-radius: var(--radius) var(--radius-sm) var(--radius-sm) var(--radius-sm); }
-#pos-top-right { border-radius: var(--radius-sm) var(--radius) var(--radius-sm) var(--radius-sm); }
-#pos-bottom-left { border-radius: var(--radius-sm) var(--radius-sm) var(--radius-sm) var(--radius); }
+#pos-top-left     { border-radius: var(--radius) var(--radius-sm) var(--radius-sm) var(--radius-sm); }
+#pos-top-right    { border-radius: var(--radius-sm) var(--radius) var(--radius-sm) var(--radius-sm); }
+#pos-bottom-left  { border-radius: var(--radius-sm) var(--radius-sm) var(--radius-sm) var(--radius); }
 #pos-bottom-right { border-radius: var(--radius-sm) var(--radius-sm) var(--radius) var(--radius-sm); }
 
 .btn-save {

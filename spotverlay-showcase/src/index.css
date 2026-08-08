@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --card-bg: rgba(28, 28, 30, 0.68);
+  --card-border: rgba(255, 255, 255, 0.12);
+  --hairline: rgba(255, 255, 255, 0.08);
+  --text-primary: rgba(255, 255, 255, 0.94);
+  --text-secondary: rgba(235, 235, 245, 0.6);
+  --accent: #1ED760;
+  --radius-card: 14px;
+  --radius-art: 8px;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, sans-serif;
+  overflow: hidden;
+}
+
+/* Remotion Abstract Background */
+.bg-gradient-1 {
+  position: absolute;
+  top: -20%;
+  left: -10%;
+  width: 70%;
+  height: 70%;
+  background: radial-gradient(circle, rgba(131,58,180,0.4) 0%, rgba(253,29,29,0) 70%);
+  filter: blur(100px);
+}
+.bg-gradient-2 {
+  position: absolute;
+  bottom: -20%;
+  right: -10%;
+  width: 80%;
+  height: 80%;
+  background: radial-gradient(circle, rgba(30,215,96,0.25) 0%, rgba(252,176,69,0) 70%);
+  filter: blur(120px);
+}
+
+/* Spotverlay CSS (copied from overlay.css) */
+.card {
+  width: 340px;
+  height: 96px;
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  align-items: center;
+  column-gap: 12px;
+  padding: 10px 12px;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-card);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); /* added shadow for video contrast */
+}
+
+.art-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-art);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--hairline);
+  flex: none;
+}
+
+.art {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.info {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.title {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.artist {
+  font-size: 11.5px;
+  font-weight: 400;
+  letter-spacing: -0.05px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.eq {
+  display: flex;
+  align-items: flex-end;
+  gap: 2.5px;
+  height: 14px;
+  flex: none;
+  padding-right: 2px;
+  opacity: 1;
+}
+
+.eq span {
+  width: 2.5px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 1px;
+  transform-origin: bottom;
+  animation: eq-bounce 1.05s ease-in-out infinite;
+}
+
+@keyframes eq-bounce {
+  0%, 100% { height: 4px; }
+  50% { height: 14px; }
+}

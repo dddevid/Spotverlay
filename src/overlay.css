@@ -20,6 +20,12 @@ html, body {
   font-family: -apple-system, "SF Pro Display", "SF Pro Text", "Segoe UI Variable",
     "Segoe UI", Helvetica, Arial, sans-serif;
   user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Allow the card to animate OUTSIDE the window bounds during slide */
+body {
+  overflow: visible;
 }
 
 .card {
@@ -37,7 +43,11 @@ html, body {
   backdrop-filter: blur(24px) saturate(160%);
   -webkit-backdrop-filter: blur(24px) saturate(160%);
   box-shadow: none;
-  transition: opacity 220ms cubic-bezier(.2,.8,.2,1), transform 220ms cubic-bezier(.2,.8,.2,1);
+  /* will-change keeps the GPU compositor layer alive even at opacity:0.
+     Without this, WebView2/Chromium may destroy and recreate the layer,
+     causing the first transition frame to be skipped entirely. */
+  will-change: opacity, transform;
+  transition: opacity 280ms cubic-bezier(.2,.8,.2,1), transform 280ms cubic-bezier(.2,.8,.2,1);
 }
 
 body.pos-top-right .card, body.pos-bottom-right .card { left: 0; }

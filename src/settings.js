@@ -1,3 +1,5 @@
+const { invoke } = window.__TAURI__.core;
+
 let currentSettings = {};
 
 const switchEl = document.getElementById('switchAlwaysOnTop');
@@ -8,7 +10,7 @@ const saveFeedback = document.getElementById('saveFeedback');
 let feedbackTimer = null;
 
 async function init() {
-  currentSettings = await window.settingsAPI.getSettings();
+  currentSettings = await invoke('get_settings');
 
   if (currentSettings.alwaysOnTop) {
     switchEl.classList.add('on');
@@ -52,10 +54,13 @@ function selectAnimation(anim) {
 }
 
 document.getElementById('btnSave').addEventListener('click', async () => {
-  await window.settingsAPI.saveSettings({
-    alwaysOnTop: currentSettings.alwaysOnTop,
-    position: currentSettings.position,
-    animation: currentSettings.animation,
+  await invoke('save_settings', {
+    newSettings: {
+      alwaysOnTop: currentSettings.alwaysOnTop,
+      position: currentSettings.position,
+      animation: currentSettings.animation,
+      firstRun: currentSettings.firstRun,
+    }
   });
 
   clearTimeout(feedbackTimer);

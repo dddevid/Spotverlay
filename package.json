@@ -1,38 +1,16 @@
 {
   "name": "spotverlay",
-  "productName": "Spotverlay",
-  "version": "1.0.1",
-  "description": "Always-on-top music overlay for Windows that reads Spotify playback via SMTC — no API key, no DLL injection.",
-  "main": "main.js",
+  "version": "2.0.0",
+  "description": "Always-on-top music overlay for Windows, macOS and Linux — no API key, no DLL injection.",
   "scripts": {
-    "start": "electron .",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder --publish never"
+    "tauri": "tauri",
+    "dev": "tauri dev",
+    "build": "tauri build"
   },
-  "build": {
-    "appId": "com.spotverlay.app",
-    "productName": "Spotverlay",
-    "win": {
-      "target": "nsis",
-      "icon": "assets/icon.png"
-    },
-    "nsis": {
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true,
-      "createDesktopShortcut": true,
-      "createStartMenuShortcut": true
-    },
-    "asarUnpack": [
-      "scripts/**/*"
-    ]
-  },
-  "author": "",
-  "license": "MIT",
   "devDependencies": {
-    "electron": "^32.0.0",
-    "electron-builder": "^24.13.3"
+    "@tauri-apps/cli": "^2"
   },
-  "allowScripts": {
-    "electron@32.3.3": true
+  "dependencies": {
+    "@tauri-apps/api": "^2"
   }
 }
