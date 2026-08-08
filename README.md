@@ -24,3 +24,15 @@ When a track changes, the overlay slides/fades in, stays for a few seconds, and 
 ## settings
 
 There's a tray icon. Right-click it (or left-click) to open settings where you can change the position (corners), animation style (fade/slide), and toggle if you want it permanently visible instead of auto-hiding. Settings are saved locally as a simple JSON file.
+
+---
+
+## troubleshooting
+
+**macOS: "Spotverlay is damaged and can't be opened"**
+This is a standard macOS Gatekeeper error for apps downloaded outside the Mac App Store that don't have a paid Apple Developer certificate. It's not actually damaged, it's just quarantined.
+To fix it, download the `.dmg` and drag the app into your **Downloads** folder (not Applications yet). Then open your Terminal and run:
+```bash
+xattr -cr ~/Downloads/Spotverlay.app
+```
+Now you can move it to your Applications folder and open it normally.
