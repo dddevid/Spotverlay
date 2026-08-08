@@ -16,24 +16,6 @@ Because the local OS APIs often return low-quality or cached album art (especial
 
 When a track changes, the overlay slides/fades in, stays for a few seconds, and hides itself again. It's fully click-through, so it won't steal your mouse focus.
 
-## building it yourself
-
-Make sure you have [Node.js](https://nodejs.org/), [Rust](https://rustup.rs/), and the [Tauri OS prerequisites](https://tauri.app/start/prerequisites/) installed.
-
-```bash
-git clone https://github.com/dddevid/Spotverlay
-cd spotverlay
-npm install
-
-# run locally
-npm run dev
-
-# build release binary
-npm run tauri build
-```
-
-The compiled executable will be in `src-tauri/target/release/`.
-
 ## settings
 
 There's a tray icon. Right-click it (or left-click) to open settings where you can change the position (corners), animation style (fade/slide), and toggle if you want it permanently visible instead of auto-hiding. Settings are saved locally as a simple JSON file.
