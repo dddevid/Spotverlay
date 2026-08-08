@@ -64,9 +64,11 @@ jobs:
             ### 🍎 macOS
             - **`Spotverlay_*_aarch64.dmg`** — For modern Apple Silicon (M1/M2/M3) Macs
             - **`Spotverlay_*_x64.dmg`** — For older Intel Macs
+            *(Note: `Spotverlay_*.app.tar.gz` files are raw app bundles, usually you just need the `.dmg`)*
             
             ### 🐧 Linux
             - **`spotverlay_*_amd64.deb`** — Debian/Ubuntu installer
+            - **`Spotverlay-*-1.x86_64.rpm`** — Fedora/RedHat installer
             - **`Spotverlay_*_amd64.AppImage`** — Universal AppImage for most distros
           releaseDraft: false
           prerelease: false
