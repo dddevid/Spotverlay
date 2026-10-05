@@ -20,6 +20,10 @@ Originally written in Electron, I rewrote this in Tauri + Rust. It now idles at 
 > [!NOTE]
 > **Linux Users:** The Linux version (D-Bus MPRIS2) has been implemented but has not been heavily tested yet. If you run into any issues (e.g. track not updating or overlay not showing), please [open an issue](https://github.com/dddevid/Spotverlay/issues), it helps a lot!
 
+## GitAds Sponsored 
+[![Sponsored by GitAds](https://gitads.dev/v1/ad-serve?source=dddevid/spotverlay@github)](https://gitads.dev/v1/ad-track?source=dddevid/spotverlay@github)
+*This project is maintained thanks to GitAds Sponsors.*
+
 ## how it works under the hood
 
 Spotverlay doesn't use any official web APIs, so you don't need to mess with OAuth tokens or developer apps. It just asks the OS what media is currently playing:
