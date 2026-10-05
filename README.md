@@ -1,3 +1,5 @@
+<!-- GitAds-Verify: GBC5L4RZ4ZYFU9LFH3WO9SCV4MF7VRT9 -->
+
 # spotverlay
 
 A simple, always-on-top overlay that shows what's playing on Spotify, [Spotifast](https://github.com/crmne/spotifast), [SpotLight](https://github.com/dddevid/SpotLight), Apple Music, or [Musly](https://github.com/dddevid/Musly) when the track changes. Built so you don't have to alt-tab out of a game or whatever you're doing just to see the song name.
