@@ -7,5 +7,5 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  base: '/Spotverlay/', // For correct relative paths in GitHub Pages
+  base: '/', // For custom domain root
 })
