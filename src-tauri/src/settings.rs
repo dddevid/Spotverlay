@@ -1,6 +1,5 @@
 use serde::{Deserialize, Serialize};
 use tauri::{AppHandle, Manager};
-
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Settings {
@@ -9,7 +8,6 @@ pub struct Settings {
     pub position: String,
     pub animation: String,
 }
-
 impl Default for Settings {
     fn default() -> Self {
         Self {
@@ -20,7 +18,6 @@ impl Default for Settings {
         }
     }
 }
-
 impl Settings {
     pub fn load(app: &AppHandle) -> Self {
         let path = settings_path(app);
@@ -31,7 +28,6 @@ impl Settings {
         }
         Self::default()
     }
-
     pub fn save(&self, app: &AppHandle) -> Result<(), Box<dyn std::error::Error>> {
         let path = settings_path(app);
         if let Some(parent) = path.parent() {
@@ -42,7 +38,6 @@ impl Settings {
         Ok(())
     }
 }
-
 fn settings_path(app: &AppHandle) -> std::path::PathBuf {
     app.path()
         .app_data_dir()

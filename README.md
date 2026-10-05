@@ -1,6 +1,6 @@
 # spotverlay
 
-A simple, always-on-top overlay that shows what's playing on Spotify when the track changes. Built so you don't have to alt-tab out of a game or whatever you're doing just to see the song name.
+A simple, always-on-top overlay that shows what's playing on Spotify, [Spotifast](https://github.com/crmne/spotifast), [SpotLight](https://github.com/dddevid/SpotLight), Apple Music, or [Musly](https://github.com/dddevid/Musly) when the track changes. Built so you don't have to alt-tab out of a game or whatever you're doing just to see the song name.
 
 Originally written in Electron, I rewrote this in Tauri + Rust. It now idles at around ~10MB of RAM instead of ~80MB, and the binary is much smaller. It supports Windows, macOS, and Linux.
 
@@ -9,10 +9,10 @@ Originally written in Electron, I rewrote this in Tauri + Rust. It now idles at 
 
 ## how it works under the hood
 
-Spotverlay doesn't use the official Spotify Web API, so you don't need to mess with OAuth tokens or developer apps. It just asks the OS what media is currently playing:
+Spotverlay doesn't use any official web APIs, so you don't need to mess with OAuth tokens or developer apps. It just asks the OS what media is currently playing:
 
 *   **Windows**: Uses `windows-rs` to read from SMTC (System Media Transport Controls).
-*   **macOS**: Runs an AppleScript (`osascript`) to query the `Spotify.app` process directly.
+*   **macOS**: Runs an AppleScript (`osascript`) to query the media player process directly.
 *   **Linux**: Listens to D-Bus via the MPRIS2 interface (using `zbus`).
 
 Because the local OS APIs often return low-quality or cached album art, the app takes the artist and track name and pings the public iTunes Search API to grab a clean 600x600 cover.
