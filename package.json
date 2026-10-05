@@ -1,6 +1,6 @@
 {
   "name": "spotverlay",
-  "version": "2.0.1",
+  "version": "2.0.4",
   "description": "Always-on-top music overlay for Windows, macOS and Linux — no API key, no DLL injection.",
   "scripts": {
     "tauri": "tauri",

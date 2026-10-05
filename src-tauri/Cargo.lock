@@ -3241,7 +3241,7 @@ dependencies = [
 
 [[package]]
 name = "spotverlay"
-version = "2.0.1"
+version = "2.0.4"
 dependencies = [
  "reqwest 0.12.28",
  "serde",

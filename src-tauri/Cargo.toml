@@ -1,6 +1,6 @@
 [package]
 name = "spotverlay"
-version = "2.0.1"
+version = "2.0.4"
 description = "Always-on-top music overlay for Windows, macOS and Linux"
 authors = ["Spotverlay"]
 edition = "2021"
