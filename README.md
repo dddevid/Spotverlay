@@ -1,5 +1,3 @@
-<!-- GitAds-Verify: GBC5L4RZ4ZYFU9LFH3WO9SCV4MF7VRT9 -->
-
 # spotverlay
 
 A simple, always-on-top overlay that shows what's playing on Spotify, [Spotifast](https://github.com/crmne/spotifast), [SpotLight](https://github.com/dddevid/SpotLight), Apple Music, or [Musly](https://github.com/dddevid/Musly) when the track changes. Built so you don't have to alt-tab out of a game or whatever you're doing just to see the song name.
@@ -8,6 +6,10 @@ Originally written in Electron, I rewrote this in Tauri + Rust. It now idles at 
 
 > [!NOTE]
 > **Linux Users:** The Linux version (D-Bus MPRIS2) has been implemented but has not been heavily tested yet. If you run into any issues (e.g. track not updating or overlay not showing), please [open an issue](https://github.com/dddevid/Spotverlay/issues), it helps a lot!
+
+## GitAds Sponsored 
+[![Sponsored by GitAds](https://gitads.dev/v1/ad-serve?source=dddevid/spotverlay@github)](https://gitads.dev/v1/ad-track?source=dddevid/spotverlay@github)
+*This project is maintained thanks to GitAds Sponsors.*
 
 ## how it works under the hood
 
