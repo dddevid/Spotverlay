@@ -1,51 +1,62 @@
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const playAudio = (src: string, vol = 0.8) => {
-  const audio = new Audio(import.meta.env.BASE_URL + src);
-  audio.volume = vol;
-  audio.play().catch(() => {});
+const triggerSFX = (src: string, vol: number, vibration: number, soundEnabled: boolean) => {
+  if (soundEnabled) {
+    const audio = new Audio(import.meta.env.BASE_URL + src);
+    audio.volume = vol;
+    audio.play().catch(() => {});
+  }
+  if (vibration > 0 && typeof navigator !== 'undefined' && navigator.vibrate) {
+    navigator.vibrate(vibration);
+  }
 };
 
-export const Showcase: React.FC<{ onComplete: () => void }> = ({ onComplete }) => {
+export const Showcase: React.FC<{ onComplete: () => void, soundEnabled: boolean }> = ({ onComplete, soundEnabled }) => {
   const [step, setStep] = useState(0);
 
   useEffect(() => {
     // 30 fps timings from Remotion
     const s2ms = (frames: number) => (frames / 30) * 1000;
 
-    // Music
-    const music = new Audio(import.meta.env.BASE_URL + 'audio/downloaded/music.mp3');
-    music.volume = 0.35;
-    music.play().catch(() => {});
+    let music: HTMLAudioElement | null = null;
+    if (soundEnabled) {
+      music = new Audio(import.meta.env.BASE_URL + 'audio/downloaded/music.mp3');
+      music.volume = 0.35;
+      music.play().catch(() => {});
+    }
 
-    // SFX Schedule
-    setTimeout(() => playAudio('audio/synth/boom.wav', 0.9), s2ms(0));
-    setTimeout(() => playAudio('audio/downloaded/whoosh-air.mp3', 0.7), s2ms(8));
-    setTimeout(() => playAudio('audio/downloaded/whoosh-transition.mp3', 0.8), s2ms(66));
-    setTimeout(() => playAudio('audio/downloaded/whoosh-air.mp3', 0.6), s2ms(84));
-    setTimeout(() => playAudio('audio/synth/tick.wav', 0.7), s2ms(118));
-    setTimeout(() => playAudio('audio/downloaded/whoosh-short.mp3', 0.6), s2ms(158));
-    setTimeout(() => playAudio('./audio/downloaded/whoosh-transition.mp3', 0.8), s2ms(166));
+    // SFX Schedule with Haptics
+    setTimeout(() => triggerSFX('audio/synth/boom.wav', 0.9, 50, soundEnabled), s2ms(0));
+    setTimeout(() => triggerSFX('audio/downloaded/whoosh-air.mp3', 0.7, 0, soundEnabled), s2ms(8));
+    setTimeout(() => triggerSFX('audio/downloaded/whoosh-transition.mp3', 0.8, 0, soundEnabled), s2ms(66));
+    setTimeout(() => triggerSFX('audio/downloaded/whoosh-air.mp3', 0.6, 0, soundEnabled), s2ms(84));
+    setTimeout(() => triggerSFX('audio/synth/tick.wav', 0.7, 10, soundEnabled), s2ms(118));
+    setTimeout(() => triggerSFX('audio/downloaded/whoosh-short.mp3', 0.6, 0, soundEnabled), s2ms(158));
+    setTimeout(() => triggerSFX('audio/downloaded/whoosh-transition.mp3', 0.8, 0, soundEnabled), s2ms(166));
+    
     [188, 194, 200, 206, 212].forEach((f, i) => {
-      setTimeout(() => playAudio(`./audio/synth/pop-${i + 1}.wav`, 0.7), s2ms(f));
+      setTimeout(() => triggerSFX(`audio/synth/pop-${i + 1}.wav`, 0.7, 15, soundEnabled), s2ms(f));
     });
-    setTimeout(() => playAudio('./audio/downloaded/whoosh-transition.mp3', 0.8), s2ms(226));
-    setTimeout(() => playAudio('./audio/synth/chime.wav', 0.75), s2ms(262));
+    
+    setTimeout(() => triggerSFX('audio/downloaded/whoosh-transition.mp3', 0.8, 0, soundEnabled), s2ms(226));
+    setTimeout(() => triggerSFX('audio/synth/chime.wav', 0.75, 30, soundEnabled), s2ms(262));
 
     // Fade out music at the end
-    setTimeout(() => {
-      let vol = 0.35;
-      const fade = setInterval(() => {
-        vol -= 0.05;
-        if (vol <= 0) {
-          music.pause();
-          clearInterval(fade);
-        } else {
-          music.volume = vol;
-        }
-      }, 100);
-    }, s2ms(255));
+    if (music) {
+      setTimeout(() => {
+        let vol = 0.35;
+        const fade = setInterval(() => {
+          vol -= 0.05;
+          if (vol <= 0) {
+            music!.pause();
+            clearInterval(fade);
+          } else {
+            music!.volume = vol;
+          }
+        }, 100);
+      }, s2ms(255));
+    }
 
     // Visual sequence
     setTimeout(() => setStep(1), s2ms(0));    // Intro
@@ -57,9 +68,9 @@ export const Showcase: React.FC<{ onComplete: () => void }> = ({ onComplete }) =
     }, s2ms(230));
 
     return () => {
-      music.pause();
+      if (music) music.pause();
     };
-  }, [onComplete]);
+  }, [onComplete, soundEnabled]);
 
   return (
     <div className="absolute inset-0 flex items-center justify-center font-sans overflow-hidden">

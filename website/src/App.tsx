@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Download, Monitor, Apple, Terminal, Play } from 'lucide-react';
+import { Download, Monitor, Apple, Terminal, Play, Volume2, VolumeX } from 'lucide-react';
 import { Showcase } from './Showcase';
 
 interface Release {
@@ -14,6 +14,7 @@ interface Release {
 
 function App() {
   const [appState, setAppState] = useState<'idle' | 'playing' | 'done'>('idle');
+  const [soundEnabled, setSoundEnabled] = useState(true);
   const [release, setRelease] = useState<Release | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -75,23 +76,34 @@ function App() {
             exit={{ opacity: 0, scale: 1.1 }}
             className="relative z-10 text-center"
           >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setAppState('playing')}
-              className="glass px-8 py-4 rounded-full flex items-center gap-3 text-xl font-bold bg-white/5 hover:bg-white/10 transition-colors group cursor-pointer border border-white/10 shadow-2xl"
-            >
-              <div className="w-10 h-10 rounded-full bg-[#1ED760] flex items-center justify-center text-black group-hover:shadow-[0_0_20px_#1ED760] transition-shadow">
-                <Play className="w-5 h-5 ml-1" fill="currentColor" />
-              </div>
-              Play Experience
-            </motion.button>
+            <div className="flex items-center gap-4">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setAppState('playing')}
+                className="glass px-8 py-4 rounded-full flex items-center gap-3 text-xl font-bold bg-white/5 hover:bg-white/10 transition-colors group cursor-pointer border border-white/10 shadow-2xl"
+              >
+                <div className="w-10 h-10 rounded-full bg-[#1ED760] flex items-center justify-center text-black group-hover:shadow-[0_0_20px_#1ED760] transition-shadow">
+                  <Play className="w-5 h-5 ml-1" fill="currentColor" />
+                </div>
+                Play Experience
+              </motion.button>
+              
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => setSoundEnabled(!soundEnabled)}
+                className="glass w-16 h-16 rounded-full flex items-center justify-center bg-white/5 hover:bg-white/10 transition-colors cursor-pointer border border-white/10 shadow-xl"
+              >
+                {soundEnabled ? <Volume2 className="w-6 h-6 text-white" /> : <VolumeX className="w-6 h-6 text-white/50" />}
+              </motion.button>
+            </div>
           </motion.div>
         )}
 
         {appState === 'playing' && (
           <motion.div key="playing" className="absolute inset-0 z-20">
-            <Showcase onComplete={() => setAppState('done')} />
+            <Showcase onComplete={() => setAppState('done')} soundEnabled={soundEnabled} />
           </motion.div>
         )}
 
