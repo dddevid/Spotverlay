@@ -4,6 +4,19 @@ A simple, always-on-top overlay that shows what's playing on Spotify, [Spotifast
 
 Originally written in Electron, I rewrote this in Tauri + Rust. It now idles at around ~10MB of RAM instead of ~80MB, and the binary is much smaller. It supports Windows, macOS, and Linux.
 
+<p align="center">
+  <img src="assets/showcase.gif" alt="Spotverlay showcase" width="720">
+</p>
+
+## screenshots
+
+<table>
+  <tr>
+    <td align="center"><img src="assets/screenshots/overlay.png" alt="Spotverlay overlay" width="400"><br><sub>the overlay</sub></td>
+    <td align="center"><img src="assets/screenshots/settings.png" alt="Spotverlay settings" width="260"><br><sub>settings</sub></td>
+  </tr>
+</table>
+
 > [!NOTE]
 > **Linux Users:** The Linux version (D-Bus MPRIS2) has been implemented but has not been heavily tested yet. If you run into any issues (e.g. track not updating or overlay not showing), please [open an issue](https://github.com/dddevid/Spotverlay/issues), it helps a lot!
 

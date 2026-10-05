@@ -1,18 +1,14 @@
-import "./index.css";
+import React from "react";
 import { Composition } from "remotion";
-import { SpotverlayTrailer } from "./SpotverlayTrailer";
+import { Showcase } from "./Showcase";
 
-export const RemotionRoot: React.FC = () => {
-  return (
-    <>
-      <Composition
-        id="SpotverlayTrailer"
-        component={SpotverlayTrailer}
-        durationInFrames={900} // 15 seconds at 60fps
-        fps={60}
-        width={1920}
-        height={1080}
-      />
-    </>
-  );
-};
+export const RemotionRoot: React.FC = () => (
+  <Composition
+    id="Showcase"
+    component={Showcase}
+    durationInFrames={300}
+    fps={30}
+    width={1920}
+    height={1080}
+  />
+);
