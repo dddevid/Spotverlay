@@ -5,11 +5,11 @@ A simple, always-on-top overlay that shows what's playing on Spotify, [Spotifast
 Originally written in Electron, I rewrote this in Tauri + Rust. It now idles at around ~10MB of RAM instead of ~80MB, and the binary is much smaller. It supports Windows, macOS, and Linux.
 
 <p align="center">
-  <a href="https://github.com/dddevid/Spotverlay/blob/master/assets/showcase.mp4">
-    <img src="assets/showcase.gif" alt="Spotverlay showcase - click to watch the full video with sound" width="720">
-  </a>
+  <video src="https://github.com/dddevid/Spotverlay/raw/master/assets/showcase.mp4" width="720" controls></video>
   <br>
-  <sub>click to watch the full video with sound</sub>
+  <a href="https://github.com/dddevid/Spotverlay/blob/master/assets/showcase.mp4">
+    <b>▶️ Clicca qui per vedere il video con l'audio se il player non funziona</b>
+  </a>
 </p>
 
 ## screenshots
