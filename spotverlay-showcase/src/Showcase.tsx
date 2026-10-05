@@ -1,6 +1,7 @@
 import React from "react";
 import {
   AbsoluteFill,
+  Audio,
   Easing,
   Img,
   Sequence,
@@ -442,9 +443,41 @@ const Outro: React.FC = () => {
   );
 };
 
+const sfx = (src: string, from: number, volume = 0.8) => (
+  <Sequence key={`${src}-${from}`} from={from} layout="none">
+    <Audio src={staticFile(src)} volume={volume} />
+  </Sequence>
+);
+
+const SoundDesign: React.FC = () => (
+  <>
+    <Audio
+      src={staticFile("audio/downloaded/music.mp3")}
+      volume={(f) =>
+        0.35 *
+        interpolate(f, [0, 15, 255, 300], [0, 1, 1, 0], {
+          extrapolateLeft: "clamp",
+          extrapolateRight: "clamp",
+        })
+      }
+    />
+    {sfx("audio/synth/boom.wav", 0, 0.9)}
+    {sfx("audio/downloaded/whoosh-air.mp3", 8, 0.7)}
+    {sfx("audio/downloaded/whoosh-transition.mp3", 66, 0.8)}
+    {sfx("audio/downloaded/whoosh-air.mp3", 84, 0.6)}
+    {sfx("audio/synth/tick.wav", 118, 0.7)}
+    {sfx("audio/downloaded/whoosh-short.mp3", 158, 0.6)}
+    {sfx("audio/downloaded/whoosh-transition.mp3", 166, 0.8)}
+    {[188, 194, 200, 206, 212].map((f, i) => sfx(`audio/synth/pop-${i + 1}.wav`, f, 0.7))}
+    {sfx("audio/downloaded/whoosh-transition.mp3", 226, 0.8)}
+    {sfx("audio/synth/chime.wav", 262, 0.75)}
+  </>
+);
+
 export const Showcase: React.FC = () => (
   <AbsoluteFill style={{ fontFamily }}>
     <Background />
+    <SoundDesign />
     <Sequence from={0} durationInFrames={80}>
       <Scene duration={80}>
         <Intro />
