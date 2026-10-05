@@ -7,5 +7,5 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
-  base: '/', // For custom domain root
+  base: './', // For correct relative paths regardless of domain or subdirectory
 })
