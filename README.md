@@ -27,6 +27,7 @@ Originally written in Electron, I rewrote this in Tauri + Rust. It now idles at 
 
 ## GitAds Sponsored 
 [![Sponsored by GitAds](https://gitads.dev/v1/ad-serve?source=dddevid/spotverlay@github)](https://gitads.dev/v1/ad-track?source=dddevid/spotverlay@github)
+
 *This project is maintained thanks to GitAds Sponsors.*
 
 ## how it works under the hood
